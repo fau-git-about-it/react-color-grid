@@ -1,5 +1,17 @@
 function TableCell(props) {
-  return <td onClick={props.handleApplyColor}></td>;
+  let color;
+  let cleared = false;
+  if (props.isCleared !== cleared) {
+    color = 'white';
+    cleared = !cleared;
+  }
+
+  return (
+    <td
+      style={{ backgroundColor: color }}
+      onClick={props.handleApplyColor}
+    ></td>
+  );
 }
 
 export default TableCell;
