@@ -8,6 +8,7 @@ class Table extends Component {
       numRows: 1,
       numCols: 1,
       selectedColor: 'red',
+      isCleared: false,
     };
   }
 
@@ -23,6 +24,10 @@ class Table extends Component {
     });
   };
 
+  clearAllColor = () => {
+    this.setState({ isCleared: !this.state.isCleared });
+  };
+
   handleColorChange = (event) => {
     this.setState({ selectedColor: event.target.value });
   };
@@ -33,12 +38,13 @@ class Table extends Component {
 
   render() {
     let rows = [];
-
+    let isCleared = this.state.isCleared;
     for (let i = 0; i < this.state.numRows; i++) {
       rows.push(
         <TableRow
           numCols={this.state.numCols}
           handleApplyColor={this.handleApplyColor}
+          isCleared={isCleared}
         />
       );
     }
@@ -47,10 +53,12 @@ class Table extends Component {
       <div>
         <button onClick={this.addRow}>Add Row</button>
         <button onClick={this.addColumn}>Add Column</button>
+        <button onClick={this.clearAllColor}>Clear All</button>
         <select onChange={this.handleColorChange}>
-          <option value="red">red</option>
-          <option value="blue">blue</option>
-          <option value="yellow">yellow</option>
+          <option value="red">Red</option>
+          <option value="blue">Blue</option>
+          <option value="yellow">Yellow</option>
+          <option value="green">Green</option>
         </select>
         <table>{rows}</table>
       </div>
