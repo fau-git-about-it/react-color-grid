@@ -1,5 +1,5 @@
-import { Component } from 'react';
-import TableRow from './TableRow';
+import { Component } from "react";
+import TableRow from "./TableRow";
 
 class Table extends Component {
   constructor() {
@@ -7,7 +7,7 @@ class Table extends Component {
     this.state = {
       numRows: 1,
       numCols: 1,
-      selectedColor: 'red',
+      selectedColor: "red",
       isCleared: false,
     };
   }
@@ -24,6 +24,24 @@ class Table extends Component {
     });
   };
 
+  deleteRow = () => {
+    if (this.state.numRows === 0) {
+      alert("You need to add a row!");
+      return 0;
+    } else {
+      this.setState({ numRows: this.state.numRows - 1 });
+    }
+  };
+
+  deleteColumn = () => {
+    if (this.state.numCols === 0) {
+      alert("You need to add a column!");
+      return 0;
+    } else {
+      this.setState({ numCols: this.state.numCols - 1 });
+    }
+  };
+
   clearAllColor = () => {
     this.setState({ isCleared: !this.state.isCleared });
   };
@@ -35,23 +53,25 @@ class Table extends Component {
   handleApplyColor = (event) => {
     event.target.style.backgroundColor = this.state.selectedColor;
   };
-  
+
   fillAll = () => {
     const Squares = document.getElementsByTagName("td");
     for (let i = 0; i < Squares.length; i++) {
       Squares[i].style.backgroundColor = this.state.selectedColor;
     }
-  }
+  };
 
   fillAllUncolored = () => {
     const Squares = document.getElementsByTagName("td");
     for (let i = 0; i < Squares.length; i++) {
-      if (Squares[i].style.backgroundColor == "white" || Squares[i].style.backgroundColor == ""){
+      if (
+        Squares[i].style.backgroundColor == "white" ||
+        Squares[i].style.backgroundColor == ""
+      ) {
         Squares[i].style.backgroundColor = this.state.selectedColor;
+      }
     }
-  }
-  }
-
+  };
 
   render() {
     let rows = [];
@@ -70,9 +90,11 @@ class Table extends Component {
       <div>
         <button onClick={this.addRow}>Add Row</button>
         <button onClick={this.addColumn}>Add Column</button>
+        <button onClick={this.deleteRow}>Delete Row</button>
+        <button onClick={this.deleteColumn}>Delete Column</button>
         <button onClick={this.clearAllColor}>Clear All</button>
-        <button onClick = {this.fillAll}> Fill All </button>
-        <button onClick = {this.fillAllUncolored}> Fill All Uncolored</button>
+        <button onClick={this.fillAll}> Fill All </button>
+        <button onClick={this.fillAllUncolored}> Fill All Uncolored</button>
         <select onChange={this.handleColorChange}>
           <option value="red">Red</option>
           <option value="blue">Blue</option>
