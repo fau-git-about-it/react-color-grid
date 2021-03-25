@@ -59,7 +59,6 @@ class Table extends Component {
     for (let i = 0; i < this.state.numRows; i++) {
       rows.push(
         <TableRow
-          //backgroundColor = {'white'}
           numCols={this.state.numCols}
           handleApplyColor={this.handleApplyColor}
           isCleared={isCleared}
