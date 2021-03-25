@@ -35,6 +35,23 @@ class Table extends Component {
   handleApplyColor = (event) => {
     event.target.style.backgroundColor = this.state.selectedColor;
   };
+  
+  fillAll = () => {
+    const Squares = document.getElementsByTagName("td");
+    for (let i = 0; i < Squares.length; i++) {
+      Squares[i].style.backgroundColor = this.state.selectedColor;
+    }
+  }
+
+  fillAllUncolored = () => {
+    const Squares = document.getElementsByTagName("td");
+    for (let i = 0; i < Squares.length; i++) {
+      if (Squares[i].style.backgroundColor == "white" || Squares[i].style.backgroundColor == ""){
+        Squares[i].style.backgroundColor = this.state.selectedColor;
+    }
+  }
+  }
+
 
   render() {
     let rows = [];
@@ -42,6 +59,7 @@ class Table extends Component {
     for (let i = 0; i < this.state.numRows; i++) {
       rows.push(
         <TableRow
+          //backgroundColor = {'white'}
           numCols={this.state.numCols}
           handleApplyColor={this.handleApplyColor}
           isCleared={isCleared}
@@ -54,6 +72,8 @@ class Table extends Component {
         <button onClick={this.addRow}>Add Row</button>
         <button onClick={this.addColumn}>Add Column</button>
         <button onClick={this.clearAllColor}>Clear All</button>
+        <button onClick = {this.fillAll}> Fill All </button>
+        <button onClick = {this.fillAllUncolored}> Fill All Uncolored</button>
         <select onChange={this.handleColorChange}>
           <option value="red">Red</option>
           <option value="blue">Blue</option>
